@@ -3,7 +3,6 @@ import "./Navbar.css";
 import { assets } from "./../../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "./../context/StoreContext";
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>;
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
@@ -20,11 +19,7 @@ const Navbar = ({ setShowLogin }) => {
 
   return (
     <div className="navbar">
-      <Link to="/">
-        {" "}
-        {/* <img src={assets.logo0} alt="" className="logo" /> */}
-        {<h2 class="nav-heading">Foodzie</h2>}
-      </Link>
+      <h1>FoodZie</h1>
       <ul className="navbar-menu">
         <Link
           to="/"
@@ -45,7 +40,7 @@ const Navbar = ({ setShowLogin }) => {
           onClick={() => setMenu("mobile-app")}
           className={menu === "mobile-app" ? "active" : ""}
         >
-          ABout
+          About Us
         </a>
         <a
           href="#footer"
