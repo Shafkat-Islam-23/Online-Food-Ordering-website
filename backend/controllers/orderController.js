@@ -4,9 +4,12 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+console.log("Stripe Secret Key:", process.env.STRIPE_SECRET_KEY);
+
 // Placing user order for frontend
 const placeOrder = async (req, res) => {
   const frontend_url = "http://localhost:5173";
+  const conversionRate = 130; // 1 USD = 130 BDT
   try {
     const newOrder = new orderModel({
       userId: req.body.userId,
@@ -20,7 +23,7 @@ const placeOrder = async (req, res) => {
 
     const line_items = req.body.items.map((item) => ({
       price_data: {
-        currency: "lkr",
+        currency: "BDT",
         product_data: {
           name: item.name,
         },
@@ -31,7 +34,7 @@ const placeOrder = async (req, res) => {
 
     line_items.push({
       price_data: {
-        currency: "lkr",
+        currency: "BDT",
         product_data: {
           name: "Delivery Charges",
         },
@@ -49,8 +52,8 @@ const placeOrder = async (req, res) => {
 
     res.json({ success: true, session_url: session.url });
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: "Error" });
+    console.error("Stripe Session Error:", error.message);
+    res.json({ success: false, message: "Stripe session creation failed" });
   }
 };
 
@@ -66,7 +69,10 @@ const verifyOrder = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: "Error" });
+    res.json({
+      success: false,
+      message: "Error in verify order orderController",
+    });
   }
 };
 
@@ -77,7 +83,7 @@ const userOrders = async (req, res) => {
     res.json({ success: true, data: orders });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: "Error" });
+    res.json({ success: false, message: "Error in userorder ordercontroller" });
   }
 };
 
@@ -88,7 +94,7 @@ const listOrders = async (req, res) => {
     res.json({ success: true, data: orders });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: "Error" });
+    res.json({ success: false, message: "Error listorder ordercontroller" });
   }
 };
 
@@ -101,7 +107,7 @@ const updateStatus = async (req, res) => {
     res.json({ success: true, message: "Status Updated" });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: "Error" });
+    res.json({ success: false, message: "Error updatestatus ordercontroller" });
   }
 };
 
