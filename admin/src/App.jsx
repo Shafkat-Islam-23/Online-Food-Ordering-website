@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { Routes, Route } from "react-router-dom";
+import List from "./pages/List/List";
 import Add from "./pages/Add/Add";
 
 import { ToastContainer } from "react-toastify";
@@ -18,6 +19,7 @@ const App = () => {
       <div className="app-content">
         <Sidebar />
         <Routes>
+          <Route path="/list" element={<List url={url} />} />
           <Route path="/add" element={<Add url={url} />} />
         </Routes>
       </div>

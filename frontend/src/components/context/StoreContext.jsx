@@ -5,7 +5,7 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
-  const [foodList, setFoodList] = useState([]);
+  //const [foodList, setFoodList] = useState([]);
   const url = "http://localhost:4000";
   const [token, setToken] = useState("");
 
@@ -51,7 +51,7 @@ const StoreContextProvider = (props) => {
   const fetchFoodList = async () => {
     try {
       const response = await axios.get(url + "/api/food/list");
-      setFoodList(response.data); // Update the dynamic food list state
+      //setFoodList(response.data); // Update the dynamic food list state
       console.log("Fetched food list: ", response.data);
     } catch (error) {
       console.error("Error fetching food list:", error.message);
@@ -79,7 +79,7 @@ const StoreContextProvider = (props) => {
   }, []);
 
   const contextValue = {
-    food_list: foodList,
+    food_list,
     cartItems,
     setCartItems,
     addToCart,
