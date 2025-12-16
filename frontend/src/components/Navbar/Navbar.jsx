@@ -19,33 +19,37 @@ const Navbar = ({ setShowLogin }) => {
 
   return (
     <div className="navbar">
-      <h1>FoodZie</h1>
+      <h1 className="nav-heading">FoodZie</h1>
       <ul className="navbar-menu">
         <Link
           to="/"
           onClick={() => setMenu("home")}
-          className={menu === "home" ? "active" : ""}
+          className={`nav-menu-content ${menu === "home" ? "active" : ""}`}
         >
           home
         </Link>
         <a
           href="#explore-menu"
           onClick={() => setMenu("menu")}
-          className={menu === "menu" ? "active" : ""}
+          className={`nav-menu-content ${menu === "menu" ? "active" : ""}`}
         >
           menu
         </a>
         <a
           href="#app-download"
           onClick={() => setMenu("mobile-app")}
-          className={menu === "mobile-app" ? "active" : ""}
+          className={`nav-menu-content ${
+            menu === "mobile-app" ? "active" : ""
+          }`}
         >
           About Us
         </a>
         <a
           href="#footer"
           onClick={() => setMenu("contact-us")}
-          className={menu === "contact-us" ? "active" : ""}
+          className={`nav-menu-content ${
+            menu === "contact-us" ? "active" : ""
+          }`}
         >
           contact us
         </a>

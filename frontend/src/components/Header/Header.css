@@ -1,10 +1,25 @@
 .header {
   height: 34vw;
-  margin: 30px auto;
-  background: url("../../assets/banner.jpg") no-repeat;
+  margin-bottom: 20px;
+  margin-top: 20px;
+
+  background: url("../../assets/banner-2.jpeg") no-repeat;
   background-size: cover;
   border-radius: 10px;
   position: relative;
+}
+
+.heading-part-1 {
+  color: oklch(82.8% 0.189 84.429);
+  /* font-family: "Quicksand", sans-serif; */
+  font-family: "Bebas Neue", cursive;
+}
+
+.header-contents p {
+  font-family: "Quicksand", sans-serif; /* Font for the paragraph */
+  font-size: 1rem;
+  line-height: 1.5;
+  color: white;
 }
 
 .header-contents {
@@ -14,7 +29,9 @@
   align-items: start;
   gap: 1.5vw;
   max-width: 50%;
-  bottom: 10%;
+  /* bottom: 10%; */
+  margin-top: 70px;
+
   left: 6vw;
   animation: fadeIn 3s;
 }
@@ -23,11 +40,6 @@
   font-weight: 500;
   color: white;
   font-size: max(4.5vw, 22px);
-}
-
-.header-contents p {
-  color: white;
-  font-size: 1vw;
 }
 
 .header-contents button {
