@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { assets } from "../../assets/assets";
 import "./FoodItem.css";
-import { StoreContext } from '../context/StoreContext';
+import { StoreContext } from "../context/StoreContext";
 
 const FoodItem = ({ id, name, price, description, image }) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
@@ -11,7 +11,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
       <div className="food-item-img-container">
         <img src={image} className="food-item-image" alt="" />
 
-        {!cartItems[id] ? (    //changes made 
+        {!cartItems[id] ? ( //changes made
           <img
             className="add"
             src={assets.add_icon_white}
@@ -38,7 +38,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
         <div className="food-item-name-rating">
           <p>{name}</p>
           <div className="star">
-            <img src={assets.rating_starts}  alt="" /> 
+            <img src={assets.rating_starts} alt="" />
           </div>
         </div>
         <p className="food-item-desc">{description}</p>

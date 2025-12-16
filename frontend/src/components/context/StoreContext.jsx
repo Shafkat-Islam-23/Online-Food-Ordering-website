@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import { food_list } from "../../assets/assets";
+//import { food_list } from "../../assets/assets";
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
-  //const [foodList, setFoodList] = useState([]);
+  const [foodList, setFoodList] = useState([]);
   const url = "http://localhost:4000";
   const [token, setToken] = useState("");
 
@@ -41,18 +41,31 @@ const StoreContextProvider = (props) => {
     let totalAmount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        let itemInfo = food_list.find((product) => product._id === item);
-        totalAmount += itemInfo.price * cartItems[item];
+        let itemInfo = foodList.find((product) => product._id === item);
+        if (itemInfo) {
+          totalAmount += itemInfo.price * cartItems[item];
+        }
       }
     }
     return totalAmount;
   };
 
+  // const fetchFoodList = async () => {
+  //   try {
+  //     const response = await axios.get(url + "/api/food/list");
+  //     //setFoodList(response.data); // Update the dynamic food list state
+  //     console.log("Fetched food list: ", response.data);
+  //   } catch (error) {
+  //     console.error("Error fetching food list:", error.message);
+  //   }
+  // };
+
   const fetchFoodList = async () => {
     try {
       const response = await axios.get(url + "/api/food/list");
-      //setFoodList(response.data); // Update the dynamic food list state
-      console.log("Fetched food list: ", response.data);
+      if (response.data.success) {
+        setFoodList(response.data.data); // Update the dynamic food list state
+      }
     } catch (error) {
       console.error("Error fetching food list:", error.message);
     }
@@ -79,7 +92,7 @@ const StoreContextProvider = (props) => {
   }, []);
 
   const contextValue = {
-    food_list,
+    foodList,
     cartItems,
     setCartItems,
     addToCart,
@@ -89,6 +102,13 @@ const StoreContextProvider = (props) => {
     token,
     setToken,
   };
+
+  console.log("foodList:", foodList);
+  console.log("cartItems:", cartItems);
+
+  if (!foodList || foodList.length === 0) {
+    return <p>Loading...</p>; // Or any other placeholder
+  }
 
   return (
     <StoreContext.Provider value={contextValue}>

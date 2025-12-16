@@ -32,8 +32,8 @@ const Footer = () => {
         <div className="footer-content-right">
           <h2>GET IN TOUCH</h2>
           <ul>
-            <li>+94 765489545</li>
-            <li>dulanjalisenarathna93@gmail.com</li>
+            <li>+01871 XXXXXX</li>
+            <li>c23110X@gamil.com</li>
           </ul>
         </div>
       </div>

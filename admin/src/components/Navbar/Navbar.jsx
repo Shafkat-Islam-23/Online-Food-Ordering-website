@@ -7,8 +7,7 @@ const Navbar = () => {
     <div className="navbar">
       {/* <img className='logo' src={assets.logo} alt="" /> */}
       <h1>Foodzie</h1>
-
-      <img src={assets.profile_image} alt="" className="profile" />
+      <h1>Admin</h1>
     </div>
   );
 };
