@@ -35,6 +35,12 @@
   color: oklch(63.7% 0.237 25.331);
 }
 
+.nav-profile-icon,
+.nav-cart-icon,
+.nav-search-icon {
+  width: 40px;
+}
+
 .navbar-menu {
   display: flex;
   list-style: none;

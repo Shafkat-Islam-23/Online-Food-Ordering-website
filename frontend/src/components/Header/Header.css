@@ -9,7 +9,8 @@
   position: relative;
 }
 
-.heading-part-1 {
+.heading-part-1,
+.header-heading {
   color: oklch(82.8% 0.189 84.429);
   /* font-family: "Quicksand", sans-serif; */
   font-family: "Bebas Neue", cursive;
