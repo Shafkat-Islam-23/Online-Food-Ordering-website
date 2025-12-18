@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-//import { food_list } from "../../assets/assets";
+
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
@@ -8,8 +8,6 @@ const StoreContextProvider = (props) => {
   const [foodList, setFoodList] = useState([]);
   const url = "http://localhost:4000";
   const [token, setToken] = useState("");
-
-  //remove food_list state
 
   const addToCart = async (itemId) => {
     if (!cartItems[itemId]) {
@@ -49,16 +47,6 @@ const StoreContextProvider = (props) => {
     }
     return totalAmount;
   };
-
-  // const fetchFoodList = async () => {
-  //   try {
-  //     const response = await axios.get(url + "/api/food/list");
-  //     //setFoodList(response.data); // Update the dynamic food list state
-  //     console.log("Fetched food list: ", response.data);
-  //   } catch (error) {
-  //     console.error("Error fetching food list:", error.message);
-  //   }
-  // };
 
   const fetchFoodList = async () => {
     try {
@@ -102,13 +90,6 @@ const StoreContextProvider = (props) => {
     token,
     setToken,
   };
-
-  console.log("foodList:", foodList);
-  console.log("cartItems:", cartItems);
-
-  if (!foodList || foodList.length === 0) {
-    return <p>Loading...</p>; // Or any other placeholder
-  }
 
   return (
     <StoreContext.Provider value={contextValue}>

@@ -8,11 +8,19 @@ const Cart = () => {
     useContext(StoreContext);
 
   const navigate = useNavigate();
+
+  // Check if foodList is empty
+  if (!foodList || foodList.length === 0) {
+    return (
+      <p className="empty-cart-message">No items available in the menu.</p>
+    );
+  }
+
   return (
     <div className="cart">
       <div className="cart-items">
         <div className="cart-items-title">
-          <p>Itmes</p>
+          <p>Items</p>
           <p>Title</p>
           <p>Price</p>
           <p>Quantity</p>
@@ -24,7 +32,7 @@ const Cart = () => {
         {foodList.map((item, index) => {
           if (cartItems[item._id] > 0) {
             return (
-              <div>
+              <div key={item._id}>
                 <div className="cart-items-title cart-items-item">
                   <img src={item.image} alt="" />
                   <p>{item.name}</p>
@@ -39,6 +47,7 @@ const Cart = () => {
               </div>
             );
           }
+          return null; // Skip items not in the cart
         })}
       </div>
       <div className="cart-bottom">

@@ -6,14 +6,17 @@ import "./FoodDisplay.css";
 const FoodDisplay = ({ category }) => {
   const { foodList } = useContext(StoreContext);
 
+  console.log("FoodList:", foodList);
+
+  if (!foodList || foodList.length === 0) {
+    return <p className="empty-food-message">No food items available.</p>;
+  }
+
   return (
     <div className="food-display" id="food-display">
       <h3>Top Dishes near you</h3>
       <div className="food-display-list">
         {foodList.map((item, index) => {
-          {
-            console.log(category, item.category);
-          }
           if (category === "All" || category === item.category) {
             return (
               <FoodItem
@@ -27,6 +30,7 @@ const FoodDisplay = ({ category }) => {
               />
             );
           }
+          return null;
         })}
       </div>
     </div>
