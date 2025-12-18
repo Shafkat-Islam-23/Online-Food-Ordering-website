@@ -1,9 +1,16 @@
 .sidebar {
   width: 18%;
   min-height: 100vh;
-  border: 1.5px solid #a9a9a9;
-  border-top: 0;
+  /* border: 1.5px solid #a9a9a9;
+  border-top: 0; */
   font-size: max(1vw, 10px);
+  font-weight: 700;
+
+  background: linear-gradient(
+    to right,
+    oklch(50.5% 0.213 27.518),
+    oklch(75% 0.183 55.934)
+  );
 }
 
 .sidebar-options {
@@ -14,19 +21,22 @@
   flex-direction: column;
   gap: 20px;
 }
+.sidebar-option p {
+  color: white;
+}
 
 .sidebar-option {
   display: flex;
   align-items: center;
   gap: 12px;
-  border: 1px solid #a9a9a9;
+  border: 2px solid black;
   padding: 8px 10px;
   border-radius: 10px;
   cursor: pointer;
 }
 
 .sidebar-option.active {
-  background-color: #fff0ed;
+  background-color: oklch(75% 0.183 55.934);
   border-color: tomato;
 }
 

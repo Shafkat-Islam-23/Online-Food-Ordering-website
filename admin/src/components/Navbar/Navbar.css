@@ -1,14 +1,26 @@
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 4%;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4%;
+
+  background: linear-gradient(
+    to right,
+    oklch(50.5% 0.213 27.518),
+    oklch(75% 0.183 55.934)
+  );
 }
 
-.navbar .logo{
-    width: max(10%,80px);
+.navbar h1 {
+  font-family: "Bebas Neue", cursive;
+  font-size: 50px;
+  color: white;
 }
 
-.navbar .profile{
-    width: 40px;
+.navbar .logo {
+  width: max(10%, 80px);
+}
+
+.navbar .profile {
+  width: 40px;
 }
