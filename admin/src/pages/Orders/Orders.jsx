@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { assets } from "./../../../../frontend/src/assets/assets";
+import { formatDate } from "../../utils/formatDate";
 
 const Orders = ({ url }) => {
   const [orders, setOrders] = useState([]);
@@ -32,54 +33,78 @@ const Orders = ({ url }) => {
   useEffect(() => {
     fetchAllOrders();
   }, []);
+
   return (
     <div className="order add">
-      <h3>Order Page</h3>
-      <div className="order-list">
-        {orders.map((order, index) => (
-          <div key={index} className="order-item">
-            <img src={assets.parcel_icon} alt="" />
-            <div>
-              <p className="order-item-food">
-                {order.items.map((item, index) => {
-                  if (index === order.items.length - 1) {
-                    return item.name + " x " + item.quantity;
-                  } else {
-                    return item.name + " x " + item.quantity + " , ";
-                  }
-                })}
-              </p>
-              <p className="order-item-name">
-                {order.address.firstName + " " + order.address.lastName}
-              </p>
-              <div className="order-item-address">
-                <p>{order.address.street}</p>
+      {/* ✅ CHANGE: Title looks more professional */}
+      <h3>Orders</h3>
 
-                {/* <p>{order.address.state + ","}</p> */}
-                {/* <p>
-                  {order.address.city +
-                    " ," +
-                    order.address.state +
-                    " ," +
-                    order.address.country +
-                    " ," +
-                    order.address.zipcode}
-                </p> */}
+      <div className="order-list">
+        {orders.map((order, index) => {
+          // ✅ CHANGE: Build clean items text once (more readable + cleaner UI)
+          const itemsText = order.items
+            .map((item) => `${item.name} x ${item.quantity}`)
+            .join(", ");
+
+          return (
+            <div key={index} className="order-item">
+              {/* ✅ CHANGE: Wrap left icon in a div for grid layout */}
+              <div className="order-left">
+                <img
+                  className="order-icon"
+                  src={assets.parcel_icon}
+                  alt="Order"
+                />
               </div>
-              <p className="order-item-phone">{order.address.phone}</p>
+
+              {/* ✅ CHANGE: Middle section for order details */}
+              <div className="order-middle">
+                <p className="order-item-food">{itemsText}</p>
+
+                <p className="order-item-name">
+                  {order.address.firstName + " " + order.address.lastName}
+                </p>
+
+                {/* ✅ existing feature: date (kept), but now positioned nicely */}
+                <p className="order-date">Ordered: {formatDate(order.date)}</p>
+
+                <div className="order-item-address">
+                  <p>{order.address.street}</p>
+                </div>
+
+                <p className="order-item-phone">{order.address.phone}</p>
+              </div>
+
+              {/* ✅ CHANGE: Right section for summary + status dropdown */}
+              <div className="order-right">
+                {/* ✅ CHANGE: Professional summary box */}
+                <div className="order-summary">
+                  <p className="order-summary-row">
+                    <span className="label">Items</span>
+                    {/* ✅ CHANGE: Fix typo Itmes -> Items */}
+                    <span className="value">{order.items.length}</span>
+                  </p>
+
+                  <p className="order-summary-row">
+                    <span className="label">Total</span>
+                    <span className="value">TK {order.amount * 130}</span>
+                  </p>
+                </div>
+
+                {/* ✅ CHANGE: Styled select (class added) */}
+                <select
+                  className="order-status-select"
+                  onChange={(event) => statusHandler(event, order._id)}
+                  value={order.status}
+                >
+                  <option value="Food Processing">Food Processing</option>
+                  <option value="Out for delivery">Out for delivery</option>
+                  <option value="Delivered">Delivered</option>
+                </select>
+              </div>
             </div>
-            <p>Itmes: {order.items.length}</p>
-            <p>TK : {order.amount * 130}</p>
-            <select
-              onChange={(event) => statusHandler(event, order._id)}
-              value={order.status}
-            >
-              <option value="Food Processing">Food Processing</option>
-              <option value="Out for delivery">Out for delivery</option>
-              <option value="Delivered">Delivered</option>
-            </select>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
