@@ -9,6 +9,7 @@ import LoginPopup from "./components/LoginPopup/LoginPopup";
 import Verify from "./pages/Verify/Verify";
 import MyOrders from "./pages/MyOrders/MyOrders";
 //import Order from "./pages/Order/Order";
+import ChatWidget from "./components/ChatWidget/ChatWidget";
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -26,6 +27,11 @@ const App = () => {
         </Routes>
       </div>
       <Footer />
+      <ChatWidget
+        baseUrl={"http://localhost:4000"}
+        userType="customer"
+      />
+
     </>
   );
 };

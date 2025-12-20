@@ -1,5 +1,6 @@
 import fs from "fs";
 import foodModel from "../models/foodModel.js";
+import { invalidateMenuCache } from "../services/menuCache.js";
 
 //add food item
 
@@ -17,6 +18,7 @@ const addFood = async (req, res) => {
   try {
     await food.save();
     res.json({ success: true, message: "Food Added" });
+    invalidateMenuCache(); //Clearing menu cache so Kuddus instantly sees the new item
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: "Error" });
@@ -28,6 +30,8 @@ const addFood = async (req, res) => {
 const listFood = async (req, res) => {
   try {
     const foods = await foodModel.find({});
+    // Debug: Log the image filenames stored in DB
+    console.log("Foods from DB:", foods.map(f => ({ name: f.name, image: f.image })));
     res.json({ success: true, data: foods });
   } catch (error) {
     console.log(error);
@@ -40,9 +44,12 @@ const listFood = async (req, res) => {
 const removeFood = async (req, res) => {
   try {
     const food = await foodModel.findById(req.body.id);
-    fs.unlink(`uploads/${food.image}`, () => {});
+    fs.unlink(`uploads/${food.image}`, () => { });
 
     await foodModel.findByIdAndDelete(req.body.id);
+    
+    invalidateMenuCache();//Clearing menu cache so Kuddus instantly sees the removed item
+
     res.json({ success: true, message: "Food Removed" });
   } catch (error) {
     console.log(error);
