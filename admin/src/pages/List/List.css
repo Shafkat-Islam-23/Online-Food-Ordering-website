@@ -1,28 +1,212 @@
-.list-table-format{
-    display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 1fr 0.5fr;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 15px;
-    border: 1px solid #cacaca;
-    font-size: 13px;
+/* ✅ CHANGE: keep your table layout in GRID so columns stay side-by-side */
+.list-table {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  width: 100%;
 }
 
-.list-table-format.title{
-    background-color: #f9f9f9;
+/* ✅ CHANGE: FORCE GRID layout for header and rows */
+.list-table-format {
+  display: grid; /* ✅ CHANGE */
+  grid-template-columns: 90px 2fr 1.2fr 1fr 140px; /* ✅ CHANGE */
+  gap: 12px; /* ✅ CHANGE */
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.list-table-format img{
-    width: 50px;
+.list-table-format.title {
+  background: rgba(255, 76, 36, 0.08);
+  border-bottom: 1px solid rgba(255, 76, 36, 0.22);
+  font-weight: 600;
 }
 
-@media (max-width:600px){
-    .list-table-format{
-        grid-template-columns: 1fr 3fr 1fr;
-        gap: 15px;
-    }
+.list-table-format b {
+  display: block; /* ✅ CHANGE: prevents "ImageNameCategory..." joining */
+  color: #111827;
+}
 
-    .list-table-format.title{
-        display: none;
-    }
+.list-table-format p {
+  color: #111827;
+}
+
+/* ✅ CHANGE: thumbnail polish */
+.list-thumb {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ✅ CHANGE: action buttons as ICONS + spacing */
+.action-buttons {
+  display: flex;
+  gap: 12px; /* ✅ CHANGE: space between buttons */
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* ✅ CHANGE: icon button base (professional) */
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  display: grid;
+  place-items: center;
+  transition: transform 0.08s ease, background 0.15s ease;
+}
+
+.icon-btn:active {
+  transform: scale(0.97);
+}
+
+/* ✅ CHANGE: edit icon style */
+.icon-btn-edit {
+  background: rgba(255, 76, 36, 0.14);
+}
+.icon-btn-edit:hover {
+  background: rgba(255, 76, 36, 0.22);
+}
+
+/* ✅ CHANGE: delete icon style */
+.icon-btn-delete {
+  background: rgba(0, 0, 0, 0.08);
+}
+.icon-btn-delete:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+/* ============================
+   ✅ CHANGE: MODAL (Popup)
+   ============================ */
+.edit-modal-overlay {
+  position: fixed; /* ✅ CHANGE */
+  inset: 0; /* ✅ CHANGE */
+  background: rgba(0, 0, 0, 0.45); /* ✅ CHANGE */
+  backdrop-filter: blur(4px); /* ✅ CHANGE */
+  z-index: 9999; /* ✅ CHANGE: bring to top */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.edit-modal {
+  width: min(720px, 95vw);
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.edit-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  font-weight: 700;
+}
+
+.modal-close {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.edit-modal-preview {
+  padding: 0 18px 14px;
+}
+
+.edit-modal-preview img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.edit-modal-form {
+  padding: 0 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edit-modal-form label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.edit-modal-form input,
+.edit-modal-form textarea {
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
+  padding: 10px 12px;
+  outline: none;
+  font-family: inherit;
+}
+
+.edit-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.edit-modal-actions {
+  padding: 0 18px 16px;
+  display: flex;
+  gap: 12px;
+}
+
+.save-btn {
+  flex: 1;
+  height: 44px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #ff4c24, #ff8a00);
+}
+
+.danger-btn {
+  width: 140px;
+  height: 44px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #fff;
+  background: #1f2937;
+}
+
+.edit-modal-hint {
+  padding: 0 18px 18px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+/* ✅ CHANGE: make modal responsive */
+@media (max-width: 600px) {
+  .list-table-format {
+    grid-template-columns: 70px 1.5fr 1fr 1fr 120px;
+  }
+  .edit-modal-grid {
+    grid-template-columns: 1fr;
+  }
+  .danger-btn {
+    width: 120px;
+  }
 }

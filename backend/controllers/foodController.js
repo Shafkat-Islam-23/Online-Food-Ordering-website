@@ -47,7 +47,7 @@ const removeFood = async (req, res) => {
     fs.unlink(`uploads/${food.image}`, () => { });
 
     await foodModel.findByIdAndDelete(req.body.id);
-    
+
     invalidateMenuCache();//Clearing menu cache so Kuddus instantly sees the removed item
 
     res.json({ success: true, message: "Food Removed" });
@@ -57,4 +57,40 @@ const removeFood = async (req, res) => {
   }
 };
 
-export { addFood, listFood, removeFood };
+// update food details 
+const updateFood = async (req, res) => {
+  try {
+    const { id, name, description, price, category } = req.body;
+
+    // validate id
+    if (!id) {
+      return res.json({ success: false, message: "Food id is required" });
+    }
+
+    // update only editable fields
+    const updated = await foodModel.findByIdAndUpdate(
+      id,
+      { name, description, price, category },
+      { new: true }
+    );
+
+    if (!updated) {
+      return res.json({ success: false, message: "Food not found" });
+    }
+
+    // clear menu cache so chatbot + frontend sees updated item quickly
+    invalidateMenuCache();
+
+    return res.json({
+      success: true,
+      message: "Food updated successfully",
+      data: updated,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({ success: false, message: "Server error while updating food" });
+  }
+};
+
+export { addFood, listFood, removeFood, updateFood };
+
