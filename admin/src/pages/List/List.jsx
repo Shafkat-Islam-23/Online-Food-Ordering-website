@@ -3,6 +3,18 @@ import "./List.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+// category list
+const FOOD_CATEGORIES = [
+  "Salad",
+  "Rolls",
+  "Deserts",
+  "Sandwich",
+  "Cake",
+  "Pure Veg",
+  "Pasta",
+  "Noodles",
+];
+
 const List = ({ url }) => {
   const [list, setList] = useState([]);
 
@@ -28,7 +40,9 @@ const List = ({ url }) => {
 
   const removeFood = async (foodId) => {
     try {
-      const response = await axios.post(`${url}/api/food/remove`, { id: foodId });
+      const response = await axios.post(`${url}/api/food/remove`, {
+        id: foodId,
+      });
       await fetchList();
       if (response.data.success) toast.success(response.data.message);
       else toast.error(response.data.message || "Error removing food");
@@ -116,12 +130,15 @@ const List = ({ url }) => {
 
         {list.map((item, index) => (
           <div key={index} className="list-table-format">
-            <img className="list-thumb" src={`${url}/images/${item.image}`} alt={item.name} />
+            <img
+              className="list-thumb"
+              src={`${url}/images/${item.image}`}
+              alt={item.name}
+            />
             <p>{item.name}</p>
             <p>{item.category}</p>
             <p>${item.price}</p>
 
-            {/* ✅ CHANGE: professional icon buttons + spacing */}
             <div className="action-buttons">
               <button
                 className="icon-btn icon-btn-edit"
@@ -131,13 +148,13 @@ const List = ({ url }) => {
                 ✏️
               </button>
 
-              <button
+              {/* <button
                 className="icon-btn icon-btn-delete"
                 title="Delete"
                 onClick={() => removeFood(item._id)}
               >
                 ✕
-              </button>
+              </button> */}
             </div>
           </div>
         ))}
@@ -155,12 +172,19 @@ const List = ({ url }) => {
             </div>
 
             <div className="edit-modal-preview">
-              <img src={`${url}/images/${selectedFood.image}`} alt={selectedFood.name} />
+              <img
+                src={`${url}/images/${selectedFood.image}`}
+                alt={selectedFood.name}
+              />
             </div>
 
             <div className="edit-modal-form">
               <label>Name</label>
-              <input name="name" value={formData.name} onChange={handleChange} />
+              <input
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
 
               <label>Description</label>
               <textarea
@@ -173,25 +197,59 @@ const List = ({ url }) => {
               <div className="edit-modal-grid">
                 <div>
                   <label>Price</label>
-                  <input name="price" type="number" value={formData.price} onChange={handleChange} />
+                  <input
+                    name="price"
+                    type="number"
+                    value={formData.price}
+                    onChange={handleChange}
+                  />
                 </div>
-                <div>
+                {/* <div>
                   <label>Category</label>
                   <input name="category" value={formData.category} onChange={handleChange} />
+                </div> */}
+
+                <div>
+                  <label>Category</label>
+
+                  {/* ✅ CHANGE: dropdown instead of manual input */}
+                  <select
+                    name="category"
+                    value={formData.category}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select category</option>
+
+                    {FOOD_CATEGORIES.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
             </div>
 
             <div className="edit-modal-actions">
-              <button className="save-btn" onClick={handleSave} disabled={loading}>
+              <button
+                className="save-btn"
+                onClick={handleSave}
+                disabled={loading}
+              >
                 {loading ? "Saving..." : "Save Changes"}
               </button>
-              <button className="danger-btn" onClick={handleDeleteInsideModal} disabled={loading}>
+              <button
+                className="danger-btn"
+                onClick={handleDeleteInsideModal}
+                disabled={loading}
+              >
                 {loading ? "Deleting..." : "Delete"}
               </button>
             </div>
 
-            <p className="edit-modal-hint">Image preview is read-only (not editable).</p>
+            <p className="edit-modal-hint">
+              Image preview is read-only (not editable).
+            </p>
           </div>
         </div>
       )}

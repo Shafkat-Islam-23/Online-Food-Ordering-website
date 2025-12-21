@@ -10,9 +10,12 @@
 
 /* ✅ CHANGE: FORCE GRID layout for header and rows */
 .list-table-format {
-  display: grid; /* ✅ CHANGE */
-  grid-template-columns: 90px 2fr 1.2fr 1fr 140px; /* ✅ CHANGE */
-  gap: 12px; /* ✅ CHANGE */
+  display: grid;
+  /* ✅ CHANGE */
+  grid-template-columns: 90px 2fr 1.2fr 1fr 140px;
+  /* ✅ CHANGE */
+  gap: 12px;
+  /* ✅ CHANGE */
   align-items: center;
   padding: 14px 16px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
@@ -25,7 +28,8 @@
 }
 
 .list-table-format b {
-  display: block; /* ✅ CHANGE: prevents "ImageNameCategory..." joining */
+  display: block;
+  /* ✅ CHANGE: prevents "ImageNameCategory..." joining */
   color: #111827;
 }
 
@@ -45,7 +49,8 @@
 /* ✅ CHANGE: action buttons as ICONS + spacing */
 .action-buttons {
   display: flex;
-  gap: 12px; /* ✅ CHANGE: space between buttons */
+  gap: 12px;
+  /* ✅ CHANGE: space between buttons */
   justify-content: flex-start;
   align-items: center;
 }
@@ -71,6 +76,7 @@
 .icon-btn-edit {
   background: rgba(255, 76, 36, 0.14);
 }
+
 .icon-btn-edit:hover {
   background: rgba(255, 76, 36, 0.22);
 }
@@ -79,6 +85,7 @@
 .icon-btn-delete {
   background: rgba(0, 0, 0, 0.08);
 }
+
 .icon-btn-delete:hover {
   background: rgba(0, 0, 0, 0.12);
 }
@@ -87,11 +94,16 @@
    ✅ CHANGE: MODAL (Popup)
    ============================ */
 .edit-modal-overlay {
-  position: fixed; /* ✅ CHANGE */
-  inset: 0; /* ✅ CHANGE */
-  background: rgba(0, 0, 0, 0.45); /* ✅ CHANGE */
-  backdrop-filter: blur(4px); /* ✅ CHANGE */
-  z-index: 9999; /* ✅ CHANGE: bring to top */
+  position: fixed;
+  /* ✅ CHANGE */
+  inset: 0;
+  /* ✅ CHANGE */
+  background: rgba(0, 0, 0, 0.45);
+  /* ✅ CHANGE */
+  backdrop-filter: blur(4px);
+  /* ✅ CHANGE */
+  z-index: 9999;
+  /* ✅ CHANGE: bring to top */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -158,6 +170,16 @@
   font-family: inherit;
 }
 
+.edit-modal-form select {
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
+  padding: 10px 12px;
+  outline: none;
+  font-family: inherit;
+  background: #fff;
+}
+
+
 .edit-modal-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -203,9 +225,11 @@
   .list-table-format {
     grid-template-columns: 70px 1.5fr 1fr 1fr 120px;
   }
+
   .edit-modal-grid {
     grid-template-columns: 1fr;
   }
+
   .danger-btn {
     width: 120px;
   }
